@@ -1,0 +1,4 @@
+# items below will not be uploaded to github
+
+node_modules/
+.env
