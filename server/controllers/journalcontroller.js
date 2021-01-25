@@ -72,7 +72,7 @@ router.get('/mine', validateSession, (req, res) => { //get request with subroute
 /*******************************
     * GET ENTRIES BY TITLE *
 ********************************/
-router.get('/:title', validateSession, (req, res) => { //different from other routes because it's dynamic
+router.get('/:title', (req, res) => { //different from other routes because it's dynamic
     let title = req.params.title; //In the request object, there is an object called params. From here, we can -
     // access the value(s) we pass into the url's parameter. In this case, it's looking specifically at the segment -
     // of the url with the keyword of 'title.'

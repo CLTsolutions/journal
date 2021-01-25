@@ -8,7 +8,7 @@ const User = require('../db').import('../models/user');
 const validateSession = (req, res, next) => {
     const token = req.headers.authorization; //variable 'token' created to hold our token pulled from authorization header
         //in incoming request
-    console.log('token ==>', token);
+    // console.log('token ==>', token);
 
     if(!token) { //different error handling responses below so using error code helps in debugging
         return res.status(403).send({ auth: false, message: 'No token provided' })
@@ -18,7 +18,7 @@ const validateSession = (req, res, next) => {
         //if successful, decodeToken will contain decoded payload (data stored in token)
         //if not successful, decodeToken remains undefined. err = null by default
         jwt.verify(token, process.env.JWT_SECRET, (err, decodeToken) => {
-            console.log('decodeToken ==>', decodeToken);
+            // console.log('decodeToken ==>', decodeToken);
             if (!err && decodeToken) { //checking if there is no err AND if decoded token has a value
                 User.findOne({
                     where: {
@@ -26,9 +26,9 @@ const validateSession = (req, res, next) => {
                     }
                 })
                 .then(user => { //sequelize 'fineOne' method returns promise we can resolve with '.then'
-                console.log('user ==>', user);
+                // console.log('user ==>', user);
                     if (!user) throw err;
-                    console.log('req ==>', req);
+                    // console.log('req ==>', req);
                     req.user = user; //property necessary later in adding to db
                     //callback sets 'user' value for the request as the id value passed to it before sending request to next destination
                     return next();//next() allows us to exit out of this function

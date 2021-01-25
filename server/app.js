@@ -19,9 +19,14 @@ let user = require('./controllers/usercontroller');
 
 //.sync is a method that ensures all the modules created inside server are put on db if they aren't already there.
 sequelize.sync();
-//sequelize.sync({force: true})
+/* **** LINE BELOW ERASES ENTIRE DB **** */
+//sequelize.sync({force: true}) 
 
 app.use(require('./middleware/headers')); //activated headers and MUST come before the routes are declared.
+
+// app.options('*', (req, res) => {
+//     res.json({ status: 'OK'});
+// });
 
 app.use(express.json()); //"hey, be prepared to handle JSON objects"
 //goes underneath sequelize.sync
